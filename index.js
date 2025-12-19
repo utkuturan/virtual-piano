@@ -31,14 +31,28 @@ function playNote(keyElement) { /* Tuş elementi alır */
 }
 
 // 3. OLAY DİNLEYİCİLERİ
-// keys listesindeki HER BİR tuş (div) için şunu yap:
-keys.forEach(key => key.addEventListener('click', () => playNote(key))); /* Tıklama için */
+let isTouchActive = false; // Dokunmatik kontrol bayrağı
 
-// --- (Dokunmatik Ekranlar İçin) ---
 keys.forEach(key => {
+    // 1. DOKUNMATİK (Telefonda ilk bu çalışır)
     key.addEventListener('touchstart', (e) => {
-        /*e.preventDefault(); // 1. Telefonun "beklemesini" ve ekranın kaymasını engelle*/
-        playNote(key);      // 2. Hemen notayı çal
+        isTouchActive = true; // "Ben parmakla bastım" de
+        playNote(key);
+        
+        // e.preventDefault() YOK. Böylece kaydırma (scroll) çalışır.
+
+        // Bayrağı yarım saniye sonra indir (ki sonra mouse ile basılabilsin)
+        setTimeout(() => {
+            isTouchActive = false;
+        }, 500);
+    });
+
+    // 2. MOUSE (Bilgisayarda bu, telefonda ise dokunmadan sonra bu çalışır)
+    key.addEventListener('mousedown', (e) => {
+        // Eğer az önce dokunmatik çalıştıysa, mouse'u iptal et (Hayalet Tıklamayı Engelle)
+        if (isTouchActive) return; 
+        
+        playNote(key);
     });
 });
 
