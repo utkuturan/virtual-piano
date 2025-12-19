@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive JavaScript Piano</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎹</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1 class="glow-title">Interactive JavaScript Piano</h1>
+
+    <div class="jukebox">
+        <h3>🎵 Playlist</h3>
+        <div class="controls">
+            <select id="songSelect">
+                <option value="" disabled selected>Bir şarkı seçin...</option>
+                <option value="moonlight">🌙 Moonlight Sonata</option>
+                <option value="godfather">🕴️ The Godfather</option>
+                <option value="imperial">🌌 Imperial March</option>
+                <option value="fur_elise">🎹 Fur Elise</option>
+                <option value="got">🐺 Game of Thrones</option>
+                <option value="harry">⚡ Harry Potter</option>
+                <option value="pink">🐾 Pink Panther</option>
+                <option value="mario">🍄 Super Mario Bros</option>
+                <option value="tetris">🧱 Tetris Theme</option>
+                <option value="turkish">🇹🇷 Turkish March</option>
+                <option value="ode">🎼 Ode to Joy</option>
+                <option value="birthday">🎂 Happy Birthday</option>
+                <option value="jingle">🎄 Jingle Bells</option>
+            </select>
+
+            <button onclick="playSelectedSong()" class="play-btn">▶ Çal</button>
+            <button onclick="stopMusic()" class="stop-btn">⏹ Durdur</button>
+        </div>
+    </div>
+
+    <p class="info-text">
+    Tuşlar üzerinde notalar ve klavye kısayolları gösterilmektedir.
+    </p>
+    
+    <div class="piano-container">
+        <div class="keys">
+            <div class="key white" data-key="z" data-sound="key01">
+                <span class="note-name">F</span><span class="key-char">z</span>
+            </div>
+            <div class="key black" data-key="x" data-sound="key02">
+                <span class="note-name">F#</span><span class="key-char">x</span>
+            </div>
+            <div class="key white" data-key="c" data-sound="key03">
+                <span class="note-name">G</span><span class="key-char">c</span>
+            </div>
+            <div class="key black" data-key="v" data-sound="key04">
+                <span class="note-name">G#</span><span class="key-char">v</span>
+            </div>
+            <div class="key white" data-key="b" data-sound="key05">
+                <span class="note-name">A</span><span class="key-char">b</span>
+            </div>
+            <div class="key black" data-key="n" data-sound="key06">
+                <span class="note-name">A#</span><span class="key-char">n</span>
+            </div>
+            <div class="key white" data-key="m" data-sound="key07">
+                <span class="note-name">B</span><span class="key-char">m</span>
+            </div>
+            <div class="key white" data-key="a" data-sound="key08">
+                <span class="note-name">C</span><span class="key-char">a</span>
+            </div>
+            <div class="key black" data-key="w" data-sound="key09">
+                <span class="note-name">C#</span><span class="key-char">w</span>
+            </div>
+            <div class="key white" data-key="s" data-sound="key10">
+                <span class="note-name">D</span><span class="key-char">s</span>
+            </div>
+            <div class="key black" data-key="e" data-sound="key11">
+                <span class="note-name">D#</span><span class="key-char">e</span>
+            </div>
+            <div class="key white" data-key="d" data-sound="key12">
+                <span class="note-name">E</span><span class="key-char">d</span>
+            </div>
+            <div class="key white" data-key="f" data-sound="key13">
+                <span class="note-name">F</span><span class="key-char">f</span>
+            </div>
+            <div class="key black" data-key="t" data-sound="key14">
+                <span class="note-name">F#</span><span class="key-char">t</span>
+            </div>
+            <div class="key white" data-key="g" data-sound="key15">
+                <span class="note-name">G</span><span class="key-char">g</span>
+            </div>
+            <div class="key black" data-key="y" data-sound="key16">
+                <span class="note-name">G#</span><span class="key-char">y</span>
+            </div>
+            <div class="key white" data-key="h" data-sound="key17">
+                <span class="note-name">A</span><span class="key-char">h</span>
+            </div>
+            <div class="key black" data-key="u" data-sound="key18">
+                <span class="note-name">A#</span><span class="key-char">u</span>
+            </div>
+            <div class="key white" data-key="j" data-sound="key19">
+                <span class="note-name">B</span><span class="key-char">j</span>
+            </div>
+            <div class="key white" data-key="k" data-sound="key20">
+                <span class="note-name">C</span><span class="key-char">k</span>
+            </div>
+            <div class="key black" data-key="o" data-sound="key21">
+                <span class="note-name">C#</span><span class="key-char">o</span>
+            </div>
+            <div class="key white" data-key="l" data-sound="key22">
+                <span class="note-name">D</span><span class="key-char">l</span>
+            </div>
+            <div class="key black" data-key="p" data-sound="key23">
+                <span class="note-name">D#</span><span class="key-char">p</span>
+            </div>
+            <div class="key white" data-key="i" data-sound="key24">
+                <span class="note-name">E</span><span class="key-char">i</span>
+            </div>
+        </div>
+    </div> 
+    <div class="footer">
+        Designed & Developed by <a href="https://github.com/utkuturan" target="_blank">Utku Turan</a> ⚡ 2025
+    </div>
+
+    <script src="songs.js"></script>
+    <script src="index.js"></script>
+
+</body>
+</html>
