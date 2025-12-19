@@ -1,50 +1,69 @@
-/* MODERN CSS RESET & TEMEL AYARLAR */
+/* =========================================
+   1. TEMEL AYARLAR VE SIFIRLAMA
+   ========================================= */
 body {
     margin: 0;
     padding: 0;
-    background: radial-gradient(circle at center, #1a1c2c, #0d0e15); /* Derin Karanlık Arka Plan */
+    /* Radyal Gradyan: Ortadan dışa doğru açılan lacivert/siyah tonları */
+    background: radial-gradient(circle at center, #1a1c2c, #0d0e15); 
     color: #ecf0f1;
     font-family: 'Poppins', sans-serif;
+    
+    /* Sayfayı tam ortalamak için Flexbox yapısı */
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    justify-content: center;
+    flex-direction: column; /* Öğeleri alt alta diz */
+    align-items: center;    /* Yatayda ortala */
+    justify-content: center; /* Dikeyde ortala */
+    min-height: 100vh;      /* Sayfa yüksekliği ekran kadar olsun */
 }
 
-/* BAŞLIK (NEON EFEKTLİ) */
+/* =========================================
+   2. BAŞLIK VE METİNLER
+   ========================================= */
 .glow-title {
     font-size: 2.5rem;
     font-weight: 600;
     color: #fff;
+    /* Neon Efekti: Yazının etrafına renkli gölge vererek parlamasını sağlar */
     text-shadow: 0 0 10px rgba(0, 255, 200, 0.5), 0 0 20px rgba(0, 255, 200, 0.3);
     margin: 30px 0 20px 0;
-    letter-spacing: 1px;
+    letter-spacing: 1px; /* Harf aralığını biraz aç */
     text-align: center;
 }
 
-/* PLAYLIST KUTUSU (GLASSMORPHISM) */
+.info-text {
+    text-align: center;
+    color: #95a5a6; /* Göz yormayan gri ton */
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/* =========================================
+   3. MÜZİK KUTUSU (JUKEBOX)
+   ========================================= */
 .jukebox {
-    background: rgba(255, 255, 255, 0.05); /* Yarı saydam */
-    backdrop-filter: blur(10px); /* Buzlu cam efekti */
+    /* Glassmorphism: Buzlu cam efekti */
+    background: rgba(255, 255, 255, 0.05); /* Çok şeffaf beyaz */
+    backdrop-filter: blur(10px);           /* Arkadaki nesneleri bulanıklaştır */
     padding: 20px 30px;
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* İnce çerçeve */
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     margin-bottom: 30px;
+    
+    /* İçerik hizalama */
     text-align: center;
     display: flex;
-    gap: 15px;
+    gap: 15px; /* Öğeler arası boşluk */
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Mobilde sığmazsa alt satıra geçsin */
 }
 
-.jukebox h3 {
-    display: none; /* "Playlist" yazısını gizle, modern durmuyor */
-}
+.jukebox h3 { display: none; } /* Başlığı gizle */
 
-/* Dropdown Menü */
+/* Şarkı Seçim Menüsü */
 #songSelect {
     padding: 12px 20px;
     border-radius: 50px;
@@ -54,67 +73,62 @@ body {
     font-family: 'Poppins', sans-serif;
     outline: none;
     cursor: pointer;
-    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2); /* İç gölge */
 }
 
-/* Butonlar */
+/* Çal/Durdur Butonları Genel */
 .jukebox button {
     padding: 10px 25px;
     border: none;
     border-radius: 50px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* Hover efektleri yumuşak olsun */
     text-transform: uppercase;
     font-size: 0.8rem;
     letter-spacing: 1px;
 }
 
 .play-btn {
-    background: linear-gradient(135deg, #11998e, #38ef7d); /* Yeşil Gradyan */
+    /* Yeşil Gradyan */
+    background: linear-gradient(135deg, #11998e, #38ef7d);
     color: white;
-    box-shadow: 0 4px 15px rgba(56, 239, 125, 0.4);
+    box-shadow: 0 4px 15px rgba(56, 239, 125, 0.4); /* Yeşil parlama */
 }
 
 .stop-btn {
-    background: linear-gradient(135deg, #cb2d3e, #ef473a); /* Kırmızı Gradyan */
+    /* Kırmızı Gradyan */
+    background: linear-gradient(135deg, #cb2d3e, #ef473a);
     color: white;
-    box-shadow: 0 4px 15px rgba(239, 71, 58, 0.4);
+    box-shadow: 0 4px 15px rgba(239, 71, 58, 0.4); /* Kırmızı parlama */
 }
 
 .jukebox button:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.1);
+    transform: translateY(-2px); /* Üzerine gelince hafif yukarı kalk */
+    filter: brightness(1.1);     /* Rengi biraz parlat */
 }
 
+/* Şarkı çalarken durdur butonunun yanıp sönmesi */
 .stop-btn.playing-now {
     animation: pulse-red 1.5s infinite;
 }
 
-/* BİLGİ YAZISI TASARIMI */
-.info-text {
-    text-align: center;
-    color: #95a5a6; /* Hafif gri */
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-    font-weight: 300;
-}
-
-/* PİYANO KASASI (3D GÖRÜNÜM) */
+/* =========================================
+   4. PİYANO GÖVDESİ
+   ========================================= */
 .piano-container {
     background: #000;
-    padding: 20px; /* Kenar çerçeve */
+    padding: 20px;
     border-radius: 15px;
-    box-shadow: 
-        0 20px 50px rgba(0,0,0,0.5), /* Alt gölge */
-        inset 0 1px 2px rgba(255,255,255,0.3); /* Üst parlama */
+    /* Piyanonun altındaki büyük gölge (3D hissi için) */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.3);
     position: relative;
     display: flex;
     justify-content: center;
-    margin-bottom: 60px; /* Footer için boşluk */
+    margin-bottom: 60px; /* Footer (Alt bilgi) çubuğu için boşluk */
 }
 
-/* TUŞ TAKIMI */
+/* Tuşları Kapsayan Alan */
 .keys {
     display: flex;
     position: relative;
@@ -123,24 +137,30 @@ body {
 .key {
     position: relative;
     cursor: pointer;
-    user-select: none;
+    user-select: none; /* Tuşların seçilmesini engelle */
     transition: all 0.1s ease;
+    
+    /* MOBİL İÇİN ÖNEMLİ: Dokununca çıkan mavi/gri kutuyu iptal et */
+    -webkit-tap-highlight-color: transparent; 
 }
 
-/* BEYAZ TUŞLAR (FİLDİŞİ EFEKTİ) */
+/* =========================================
+   5. BEYAZ TUŞLAR
+   ========================================= */
 .key.white {
     width: 60px;
     height: 220px;
+    /* Fildişi görünümü için yukarıdan aşağı gradyan */
     background: linear-gradient(to bottom, #fff 0%, #eee 100%);
     border: 1px solid #ccc;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px; /* Sadece alt köşeleri yuvarla */
     margin: 0 2px;
-    box-shadow: 
-        inset 0 -5px 10px rgba(0,0,0,0.1), /* İç derinlik */
-        0 2px 5px rgba(0,0,0,0.2); /* Dış gölge */
-    z-index: 1;
     
-    /* Yazı hizalama */
+    /* Tuşun içbükey görünmesi için gölge oyunları */
+    box-shadow: inset 0 -5px 10px rgba(0,0,0,0.1), 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1; /* Siyah tuşların altında kalmalı */
+    
+    /* Harfleri en alta hizalamak için */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -149,33 +169,35 @@ body {
     color: #95a5a6;
 }
 
+/* Beyaz tuş basılma efekti (PC) */
 .key.white:active, .key.white.pressed {
     background: linear-gradient(to bottom, #f1f1f1 0%, #e1e1e1 100%);
-    transform: translateY(2px); /* Basılma efekti */
+    transform: translateY(2px); /* Tuşu 2px aşağı it (Mekanik his) */
     box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2);
-    border-bottom: 5px solid #00d2ff; /* Neon Mavi Çizgi */
+    border-bottom: 5px solid #00d2ff; /* Altına neon mavi çizgi ekle */
 }
 
-/* SİYAH TUŞLAR (MAT SİYAH) */
+/* =========================================
+   6. SİYAH TUŞLAR (DÜZELTİLMİŞ)
+   ========================================= */
 .key.black {
     width: 40px;
     height: 140px;
     background: linear-gradient(to bottom, #333 0%, #000 100%);
     border-radius: 0 0 3px 3px;
-    position: absolute;
-    margin-left: -20px; /* İki beyaz tuşun arasına bindir */
-    z-index: 2; /* Üstte durmalı */
-
-    position: relative;
-    margin-left: -20px; /* Kendini solundaki beyaz tuşun üzerine çeker */
-    margin-right: -20px; /* Sağındaki beyaz tuşu kendi altına çeker */
-
-
-    box-shadow: 
-        2px 2px 5px rgba(0,0,0,0.5),
-        inset 0 5px 5px rgba(255,255,255,0.1); /* Üst parlama */
     
-    /* Yazı hizalama */
+    /* KRİTİK DÜZELTME: Absolute yerine Relative kullanıldı */
+    position: relative; 
+    
+    /* İki beyaz tuşun üzerine binmesi için negatif kenar boşluğu */
+    margin-left: -20px; 
+    margin-right: -20px; 
+    
+    z-index: 2; /* Beyaz tuşların üzerinde durmalı */
+    
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5), inset 0 5px 5px rgba(255,255,255,0.1);
+    
+    /* Harf hizalama */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -184,13 +206,16 @@ body {
     color: #7f8c8d;
 }
 
+/* Siyah tuş basılma efekti (PC) */
 .key.black:active, .key.black.pressed {
     background: #111;
-    transform: translateY(2px);
-    box-shadow: inset 0 0 10px #00d2ff; /* İçten neon yanma */
+    transform: translateY(2px); /* Tuşu aşağı it */
+    box-shadow: inset 0 0 10px #00d2ff; /* İçten neon ışık yak */
 }
 
-/* KLAVYE HARFLERİ VE NOTALAR */
+/* =========================================
+   7. DİĞER DETAYLAR (Not İsimleri & Footer)
+   ========================================= */
 .note-name {
     font-weight: bold;
     font-size: 1.1rem;
@@ -205,9 +230,8 @@ body {
     margin-top: 5px;
 }
 
-/* FOOTER (SABİT) */
 .footer {
-    position: fixed;
+    position: fixed; /* Sayfanın en altına sabitle */
     bottom: 0;
     width: 100%;
     text-align: center;
@@ -218,98 +242,76 @@ body {
     font-size: 0.9rem;
     border-top: 1px solid #333;
 }
+.footer a { color: #00d2ff; text-decoration: none; font-weight: 600; }
 
-.footer a {
-    color: #00d2ff;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-/* ANİMASYONLAR */
+/* Durdur butonu yanıp sönme animasyonu */
 @keyframes pulse-red {
     0% { box-shadow: 0 0 0 0 rgba(239, 71, 58, 0.7); }
     70% { box-shadow: 0 0 0 10px rgba(239, 71, 58, 0); }
     100% { box-shadow: 0 0 0 0 rgba(239, 71, 58, 0); }
 }
 
-/* RESPONSIVE (MOBİL) AYARLARI */
+/* =========================================
+   8. MOBİL AYARLARI (RESPONSIVE)
+   ========================================= */
 @media (max-width: 800px) {
     .glow-title { font-size: 1.5rem; width: 100%; margin-top: 60px;}
     
     .piano-container {
         width: 100%;
-        overflow-x: auto; /* Kaydırma */
-        justify-content: flex-start; /* Sola yasla ki kaydırılsın */
+        
+        /* Yatay Kaydırmayı Aç */
+        overflow-x: auto; 
+        
+        justify-content: flex-start; /* Sola yasla ki kaydırma başlasın */
         padding: 10px;
-        background: transparent; /* Mobilde kasayı kaldır */
+        background: transparent; /* Mobilde siyah kasayı kaldır */
         box-shadow: none;
-
-        /* --- (Kaydırma İyileştirmesi) --- */
-        -webkit-overflow-scrolling: touch; /* iPhone'da takılmadan kayması için */
-        padding-bottom: 30px; /* Parmağın rahat etmesi için alt boşluk */
-
+        
+        /* iPhone'da kaydırmanın "yağ gibi" akması için */
+        -webkit-overflow-scrolling: touch; 
+        padding-bottom: 30px;
     }
 
     .keys {
-        min-width: 720px; /* Kaydırma genişliği */
+        min-width: 720px; /* Tuşların sıkışmaması için minimum genişlik */
         margin: 0 auto;
     }
 
-    .key-char { display: none; } /* Mobilde harfleri gizle */
+    /* Mobilde kalabalık yapmasın diye harfleri gizle */
+    .key-char, .info-text { display: none; }
     
-    .jukebox {
-        flex-direction: column; /* Mobilde alt alta dizilsin */
-        width: 80%;
+    /* --- TİTREME (JITTER) ENGELLEYİCİ KODLAR --- */
+    /* Mobilde tuşlar aşağı inmemeli, yoksa ekran titrer */
+
+    .key.white:active, .key.white.pressed {
+        transform: none !important; /* Hareketi iptal et */
+        border-bottom: 1px solid #ccc !important; /* Kenarı kalınlaştırma */
+        background: #e6e6e6 !important; /* Sadece rengini değiştir */
+        box-shadow: inset 0 -5px 10px rgba(0,0,0,0.1) !important;
     }
 
-    .info-text {
-        display: none; /* Ekran 800px'den küçükse bu yazıyı yok et */
-    }
-}
-
-@media (hover: none) and (pointer: coarse) {
-    
-    /* Bilgilendirme yazısını ve harfleri kesinlikle gizle */
-    .info-text, 
-    .key-char {
-        display: none !important;
-    }
-    
-    /* Geniş ekranda (yan tutuşta) bile piyano kaydırılabilsin */
-    .piano-container {
-        overflow-x: auto;
-        justify-content: flex-start;
-        background: transparent; /* Mobildeki gibi kasa olmasın */
-        box-shadow: none;
-    }
-    
-    /* Tuşlar yan ekranda da sığsın diye genişlik ayarı */
-    .keys {
-        min-width: 720px;
-        margin: 0 auto;
+    .key.black:active, .key.black.pressed {
+        transform: none !important; /* Hareketi iptal et */
+        background: #000 !important;
+        box-shadow: inset 0 0 15px #00d2ff !important;
     }
 }
 
-/* ÖZEL KAYDIRMA ÇUBUĞU STİLİ (SADECE WEBKIT TARAYICILAR İÇİN) */
-
-/* Çubuğun kendisi (Yol) */
-.piano-container::-webkit-scrollbar {
-    height: 8px; /* Yeterince ince ama görülebilir */
+/* =========================================
+   9. ÖZEL KAYDIRMA ÇUBUĞU (SCROLLBAR)
+   ========================================= */
+.piano-container::-webkit-scrollbar { 
+    height: 8px; /* Çubuğun kalınlığı */
 }
-
-/* Çubuğun arka planı (Karanlık tema ile uyumlu) */
-.piano-container::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05); /* Çok silik bir zemin */
-    border-radius: 4px;
+.piano-container::-webkit-scrollbar-track { 
+    background: rgba(255, 255, 255, 0.05); /* Çubuğun yolu (Silik arka plan) */
+    border-radius: 4px; 
 }
-
-/* Tutup sürüklediğimiz kısım (Thumb) */
-.piano-container::-webkit-scrollbar-thumb {
-    background: rgba(0, 210, 255, 0.3); /* Senin neon mavisi renginde, şeffaf */
-    border-radius: 4px;
+.piano-container::-webkit-scrollbar-thumb { 
+    background: rgba(0, 210, 255, 0.3); /* Tutamaç (Neon Mavi, Şeffaf) */
+    border-radius: 4px; 
 }
-
-/* Üzerine gelince veya dokununca parlasın */
-.piano-container::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 210, 255, 0.6); 
+.piano-container::-webkit-scrollbar-thumb:hover { 
+    background: rgba(0, 210, 255, 0.6); /* Üzerine gelince parlasın */
 }
