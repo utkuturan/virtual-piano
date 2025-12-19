@@ -138,7 +138,7 @@ body {
     position: relative;
     cursor: pointer;
     user-select: none; /* Tuşların seçilmesini engelle */
-    transition: all 0.1s ease;
+    transition: all 0.4s ease-out; /* Tuşu bırakınca rengi yavaşça eski haline dönsün */
     
     /* MOBİL İÇİN ÖNEMLİ: Dokununca çıkan mavi/gri kutuyu iptal et */
     -webkit-tap-highlight-color: transparent; 
@@ -252,49 +252,83 @@ body {
 }
 
 /* =========================================
-   8. MOBİL AYARLARI (RESPONSIVE)
+   8. MOBİL UYUMLULUK AYARLARI
    ========================================= */
+/* --- MOBİL AYARLARI (GÜNCELLENMİŞ) --- */
 @media (max-width: 800px) {
     .glow-title { font-size: 1.5rem; width: 100%; margin-top: 60px;}
     
     .piano-container {
         width: 100%;
-        
-        /* Yatay Kaydırmayı Aç */
-        overflow-x: auto; 
-        
-        justify-content: flex-start; /* Sola yasla ki kaydırma başlasın */
+        overflow-x: auto;
+        justify-content: flex-start;
         padding: 10px;
-        background: transparent; /* Mobilde siyah kasayı kaldır */
+        background: transparent;
         box-shadow: none;
-        
-        /* iPhone'da kaydırmanın "yağ gibi" akması için */
-        -webkit-overflow-scrolling: touch; 
+        -webkit-overflow-scrolling: touch;
         padding-bottom: 30px;
     }
 
     .keys {
-        min-width: 720px; /* Tuşların sıkışmaması için minimum genişlik */
+        min-width: 720px;
         margin: 0 auto;
     }
 
-    /* Mobilde kalabalık yapmasın diye harfleri gizle */
     .key-char, .info-text { display: none; }
     
-    /* --- TİTREME (JITTER) ENGELLEYİCİ KODLAR --- */
-    /* Mobilde tuşlar aşağı inmemeli, yoksa ekran titrer */
-
-    .key.white:active, .key.white.pressed {
-        transform: none !important; /* Hareketi iptal et */
-        border-bottom: 1px solid #ccc !important; /* Kenarı kalınlaştırma */
-        background: #e6e6e6 !important; /* Sadece rengini değiştir */
-        box-shadow: inset 0 -5px 10px rgba(0,0,0,0.1) !important;
+    /* 1. BEYAZ TUŞLAR: Boşlukları (Margin) Sıfırla -> B-C arası kapanır */
+    /* MOBİLDE BEYAZ TUŞLAR (BOŞLUKSUZ TAM SÜRÜM) */
+    .key.white {
+        /* 1. Önce tüm kenar boşluklarını SIFIRLA (Sol boşluk gitsin) */
+        margin: 0 !important; 
+        
+        /* 2. Sonra sadece sağı eksi yap (Üst üste bindir) */
+        margin-right: -1px !important; 
+        
+        /* 3. Köşeleri düzelt */
+        border-radius: 0 !important;
+        
+        /* 4. Sabit ayarlar */
+        width: 60px;
+        box-shadow: inset 0 -5px 10px rgba(0,0,0,0.1);
+        z-index: 1;
     }
 
-    .key.black:active, .key.black.pressed {
-        transform: none !important; /* Hareketi iptal et */
-        background: #000 !important;
-        box-shadow: inset 0 0 15px #00d2ff !important;
+    .key.white:last-child {
+        margin-right: 0 !important;
+    }
+
+    /* Mobilde titreme olmasın diye hareketi iptal et */
+    .key.white:active, .key.white.pressed {
+        transform: none !important;
+        border-bottom: 1px solid #ccc !important;
+        background: #e6e6e6 !important;
+    }
+
+    /* 2. SİYAH TUŞLAR: Beyazlar birleşince kaymasın diye ortala */
+    /* SİYAH TUŞLAR (DÜZELTİLMİŞ HALİ) */
+    .key.black {
+        width: 40px;
+        height: 140px;
+        background: linear-gradient(to bottom, #333 0%, #000 100%);
+        border-radius: 0 0 3px 3px;
+        
+        position: relative; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        z-index: 2; 
+
+      
+        /* Karmaşık dış gölgeyi kaldırdık, sadece iç parlama kaldı */
+        box-shadow: inset 0 5px 5px rgba(255,255,255,0.1); 
+        
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        padding-bottom: 15px;
+        color: #7f8c8d;
     }
 }
 
