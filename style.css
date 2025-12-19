@@ -243,6 +243,11 @@ body {
         padding: 10px;
         background: transparent; /* Mobilde kasayı kaldır */
         box-shadow: none;
+
+        /* --- (Kaydırma İyileştirmesi) --- */
+        -webkit-overflow-scrolling: touch; /* iPhone'da takılmadan kayması için */
+        padding-bottom: 30px; /* Parmağın rahat etmesi için alt boşluk */
+
     }
 
     .keys {
@@ -283,4 +288,28 @@ body {
         min-width: 720px;
         margin: 0 auto;
     }
+}
+
+/* ÖZEL KAYDIRMA ÇUBUĞU STİLİ (SADECE WEBKIT TARAYICILAR İÇİN) */
+
+/* Çubuğun kendisi (Yol) */
+.piano-container::-webkit-scrollbar {
+    height: 8px; /* Yeterince ince ama görülebilir */
+}
+
+/* Çubuğun arka planı (Karanlık tema ile uyumlu) */
+.piano-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05); /* Çok silik bir zemin */
+    border-radius: 4px;
+}
+
+/* Tutup sürüklediğimiz kısım (Thumb) */
+.piano-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 210, 255, 0.3); /* Senin neon mavisi renginde, şeffaf */
+    border-radius: 4px;
+}
+
+/* Üzerine gelince veya dokununca parlasın */
+.piano-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 210, 255, 0.6); 
 }

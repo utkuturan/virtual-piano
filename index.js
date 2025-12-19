@@ -37,7 +37,7 @@ keys.forEach(key => key.addEventListener('click', () => playNote(key))); /* Tık
 // --- (Dokunmatik Ekranlar İçin) ---
 keys.forEach(key => {
     key.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // 1. Telefonun "beklemesini" ve ekranın kaymasını engelle
+        /*e.preventDefault(); // 1. Telefonun "beklemesini" ve ekranın kaymasını engelle*/
         playNote(key);      // 2. Hemen notayı çal
     });
 });
